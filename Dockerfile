@@ -22,6 +22,7 @@ RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
+RUN apk add --no-cache su-exec
 WORKDIR /app
 ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
@@ -33,10 +34,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 # Ensure prisma schema is available for runtime sync
 COPY --from=builder /app/prisma ./prisma
 
-USER nextjs
 EXPOSE 3000
 ENV PORT 3000
 
 # Automatically push database schema on startup to ensure production is always synced
-# Note: npx prisma is available via the standalone bundle's node_modules
-CMD ["sh", "-c", "npx prisma db push && npx prisma db seed && node server.js"]
+# We run this as root to ensure permissions for npx cache, then start as nextjs
+CMD npx prisma db push && npx prisma db seed && chown -R nextjs:nodejs . && exec su-exec nextjs node server.js
