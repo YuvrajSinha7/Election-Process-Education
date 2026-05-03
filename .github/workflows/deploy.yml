@@ -27,6 +27,18 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
-      # In a real scenario, we would add steps to push to ECR and deploy to ECS/Amplify
-      - name: AWS Deployment Notification
-        run: echo "Production build validated. Ready for AWS Amplify / App Runner synchronization."
+      # Elastic Beanstalk Deployment (Optional)
+      - name: Deploy to Elastic Beanstalk
+        if: github.event_name == 'workflow_dispatch'
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: "VoteWise"
+          environment_name: "VoteWise-env"
+          version_label: ${{ github.sha }}
+          region: "us-west-2"
+          deployment_package: deploy.zip
+
+      - name: Deployment Notification
+        run: echo "Production build validated. Ready for AWS deployment (App Runner / Elastic Beanstalk)."
