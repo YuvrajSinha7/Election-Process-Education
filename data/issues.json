@@ -1,0 +1,30 @@
+[
+  {
+    "id": "economy",
+    "title": "Economic Growth & Stability",
+    "summary": "Focuses on GDP growth, inflation control, and job creation strategies.",
+    "description": "The economy remains the top priority for voters, with discussions ranging from tax reforms to the integration of AI in the workforce.",
+    "perspectives": [
+      {
+        "view": "Liberal Market Strategy",
+        "points": ["Deregulation to spark innovation", "Lower corporate taxes", "Global trade expansion"]
+      },
+      {
+        "view": "Social Welfare Integration",
+        "points": ["Stronger labor laws", "Wealth redistribution through progressive tax", "Support for small businesses"]
+      }
+    ]
+  },
+  {
+    "id": "healthcare",
+    "title": "Public Health & Infrastructure",
+    "summary": "Policies regarding medical access, insurance, and emergency preparedness.",
+    "description": "Healthcare debates center on whether to maintain a private-public mix or transition towards a fully single-payer system.",
+    "perspectives": [
+      {
+        "view": "Private-Public Partnership",
+        "points": ["Competitive insurance markets", "State-funded safety nets", "Innovation through private research"]
+      }
+    ]
+  }
+]

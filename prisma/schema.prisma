@@ -1,0 +1,93 @@
+// This is your Prisma schema file
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String?
+  role          Role      @default(USER)
+  image         String?
+  activities    ActivityLog[]
+  savedItems    SavedItem[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Candidate {
+  id            String    @id @default(cuid())
+  name          String
+  party         String
+  role          String
+  bio           String
+  image         String
+  education     String
+  career        String[]
+  issueStances  Json      // Stored as { topic: stance }
+  metrics       Json      // Stored as { approval: number, ... }
+  elections     ElectionCandidate[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Election {
+  id            String    @id @default(cuid())
+  title         String
+  type          String
+  status        String
+  date          DateTime
+  description   String
+  timeline      Json?     // Stored as [{ date: string, event: string }]
+  results       Json?     // Stored as { winner: string, turnout: string }
+  candidates    ElectionCandidate[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model ElectionCandidate {
+  electionId    String
+  candidateId   String
+  election      Election  @relation(fields: [electionId], references: [id])
+  candidate     Candidate @relation(fields: [candidateId], references: [id])
+  @@id([electionId, candidateId])
+}
+
+model Issue {
+  id            String    @id @default(cuid())
+  title         String
+  summary       String
+  description   String
+  perspectives  Json      // Stored as [{ view: string, points: string[] }]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model ActivityLog {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  action      String    // e.g., "SEARCH", "VIEW_CANDIDATE", "TAKE_QUIZ"
+  metadata    Json?
+  createdAt   DateTime  @default(now())
+}
+
+model SavedItem {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  itemId      String
+  itemType    String    // "CANDIDATE" or "ELECTION"
+  createdAt   DateTime  @default(now())
+}

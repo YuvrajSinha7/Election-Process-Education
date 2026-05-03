@@ -1,0 +1,31 @@
+[
+  {
+    "id": "e1",
+    "title": "General Assembly Election 2026",
+    "type": "National",
+    "status": "upcoming",
+    "date": "2026-11-15",
+    "description": "The 2026 General Assembly election will determine the next governing body for the nation, focusing on economic recovery and social reforms.",
+    "timeline": [
+      {"date": "2026-05-01", "event": "Voter Registration Opens"},
+      {"date": "2026-08-15", "event": "Candidate Nominations"},
+      {"date": "2026-10-01", "event": "Campaigning Phase Begins"},
+      {"date": "2026-11-15", "event": "Polling Day"},
+      {"date": "2026-11-20", "event": "Result Declaration"}
+    ],
+    "regions": ["North District", "South Coast", "Central Highlands", "Western Plains"]
+  },
+  {
+    "id": "e2",
+    "title": "Municipal Council 2025",
+    "type": "Local",
+    "status": "completed",
+    "date": "2025-04-10",
+    "description": "Local municipal elections for the urban development council.",
+    "results": {
+      "winner": "Progressive Alliance",
+      "turnout": "64.2%",
+      "seats_won": 12
+    }
+  }
+]

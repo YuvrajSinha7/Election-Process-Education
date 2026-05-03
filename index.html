@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoteWise | AI-Powered Election Encyclopedia</title>
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar glass">
+        <div class="nav-content">
+            <div class="logo">
+                <i class="fas fa-vote-yea"></i>
+                <span>VoteWise</span>
+            </div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search candidates, elections, or issues...">
+            </div>
+            <div class="user-actions">
+                <button class="btn-login">Log In</button>
+                <button class="btn-signup">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Left Sidebar: Navigation -->
+        <aside class="sidebar">
+            <nav class="side-nav">
+                <div class="nav-group">
+                    <span class="group-title">GENERAL</span>
+                    <a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                    <a href="#elections" class="nav-link"><i class="fas fa-calendar-alt"></i> Elections</a>
+                    <a href="#candidates" class="nav-link"><i class="fas fa-users"></i> Candidates</a>
+                </div>
+                <div class="nav-group">
+                    <span class="group-title">EDUCATION</span>
+                    <a href="#issues" class="nav-link"><i class="fas fa-book-open"></i> Issue Explorer</a>
+                    <a href="#learning" class="nav-link"><i class="fas fa-graduation-cap"></i> Learning Hub</a>
+                    <a href="#match" class="nav-link"><i class="fas fa-adjust"></i> Candidate Match</a>
+                </div>
+                <div class="nav-group">
+                    <span class="group-title">ACCOUNT</span>
+                    <a href="#dashboard" class="nav-link"><i class="fas fa-user-circle"></i> Dashboard</a>
+                    <a href="#settings" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main id="main-content" class="content-area">
+            <!-- Content will be injected here by JS -->
+            <div class="loading-state">
+                <div class="skeleton-title"></div>
+                <div class="skeleton-text"></div>
+                <div class="skeleton-card"></div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar: Quick Facts -->
+        <aside class="right-sidebar">
+            <div class="facts-card">
+                <h3>Quick Facts</h3>
+                <div id="quick-facts-content">
+                    <p>Select an item to see key details.</p>
+                </div>
+            </div>
+            <div class="ai-assistant-preview">
+                <div class="ai-header">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Assistant</span>
+                </div>
+                <p>Have questions about the election? Ask me anything!</p>
+                <button id="open-ai-chat" class="btn-ai">Start Chat</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Floating AI Assistant Button -->
+    <div id="ai-chat-bubble" class="ai-bubble">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/utils/api.js"></script>
+    <script src="js/components/candidateCard.js"></script>
+    <script src="js/components/quiz.js"></script>
+    <script src="js/components/timeline.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
