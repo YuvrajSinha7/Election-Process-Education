@@ -29,7 +29,6 @@ jobs:
 
       # Elastic Beanstalk Deployment (Optional)
       - name: Deploy to Elastic Beanstalk
-        if: github.event_name == 'workflow_dispatch'
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
