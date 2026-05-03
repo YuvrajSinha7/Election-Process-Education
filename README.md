@@ -29,11 +29,20 @@ npx prisma generate
 npm run dev
 ```
 
-### 3. AWS Launch (App Runner)
+### 3. AWS Launch (App Runner - Recommended)
 1. Connect your GitHub repository to **AWS App Runner**.
 2. Select the `Dockerfile` for the build configuration.
-3. Add Environment Variables from `.env.example`.
-4. Deploy.
+3. Add Environment Variables (`DATABASE_URL`, `GEMINI_API_KEY`, `NEXTAUTH_SECRET`).
+4. Deploy. The database will automatically sync and seed on startup.
+
+### 4. AWS Launch (Elastic Beanstalk)
+1. Create a new EB environment with the **Docker** platform.
+2. Upload the source code (including `Dockerfile` and `Dockerrun.aws.json`).
+3. Configure environment variables in the EB console.
+
+## 📄 Maintenance
+- **Database Sync**: The app uses `prisma db push` and `db seed` on container startup to keep production data fresh.
+- **CI/CD**: GitHub Actions validate every push to `main`.
 
 ## 📄 License
 This project is licensed under the MIT License.
