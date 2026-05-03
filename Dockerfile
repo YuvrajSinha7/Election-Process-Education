@@ -32,10 +32,13 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Ensure prisma schema is available for runtime sync
+COPY --from=builder /app/prisma ./prisma
 
 USER nextjs
 EXPOSE 3000
 ENV PORT 3000
 
 # Automatically push database schema on startup to ensure production is always synced
+# Note: npx prisma is available via the standalone bundle's node_modules
 CMD ["sh", "-c", "npx prisma db push && node server.js"]
