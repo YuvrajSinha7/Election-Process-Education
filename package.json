@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && npm run sync-assets",
+    "sync-assets": "mkdir -p public && cp -r js css data index.html public/ || xcopy /E /I /Y js public\\js && xcopy /E /I /Y css public\\css && xcopy /E /I /Y data public\\data && copy index.html public\\"
   },
   "dependencies": {
     "@google/generative-ai": "^0.1.0",
