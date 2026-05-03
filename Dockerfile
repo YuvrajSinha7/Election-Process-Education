@@ -40,4 +40,4 @@ ENV PORT 3000
 
 # Automatically push database schema on startup to ensure production is always synced
 # Note: npx prisma is available via the standalone bundle's node_modules
-CMD ["sh", "-c", "npx prisma db push && node server.js"]
+CMD ["sh", "-c", "npx prisma db push && npx prisma db seed && node server.js"]
