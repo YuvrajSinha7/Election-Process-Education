@@ -6,7 +6,8 @@ const Router = {
     'issues': renderIssues,
     'match': renderMatch,
     'learning': renderLearning,
-    'candidate-detail': renderCandidateDetail
+    'candidate-detail': renderCandidateDetail,
+    'dashboard': renderDashboard
   },
 
   init() {
@@ -274,5 +275,71 @@ async function renderMatch() {
 
 async function renderLearning() {
   const main = document.getElementById('main-content');
-  main.innerHTML = `<div class="page-header fade-in"><h2>Learning Hub</h2><p>Educational resources on voting and governance.</p></div><p style="margin-top: 2rem;">Module under construction...</p>`;
+  main.innerHTML = `
+    <div class="page-header fade-in">
+      <h2>Learning Hub</h2>
+      <p>Master the fundamentals of democracy and the voting process.</p>
+    </div>
+    <div class="learning-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+      <div class="learning-card glass fade-in" style="padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border);">
+        <span class="badge" style="background: rgba(59, 130, 246, 0.1); color: var(--primary-light); margin-bottom: 1rem;">MODULE 1</span>
+        <h3>How to Vote</h3>
+        <p style="margin: 1rem 0; color: var(--text-muted);">A step-by-step guide to registration, polling locations, and casting your ballot.</p>
+        <button class="btn-secondary" style="width: 100%;">Start Module</button>
+      </div>
+      <div class="learning-card glass fade-in" style="padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border); animation-delay: 0.1s;">
+        <span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--accent); margin-bottom: 1rem;">MODULE 2</span>
+        <h3>Structure of Govt</h3>
+        <p style="margin: 1rem 0; color: var(--text-muted);">Understanding the branches of government and their specific responsibilities.</p>
+        <button class="btn-secondary" style="width: 100%;">Start Module</button>
+      </div>
+      <div class="learning-card glass fade-in" style="padding: 2rem; border-radius: var(--radius-lg); border: 1px solid var(--border); animation-delay: 0.2s;">
+        <span class="badge" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; margin-bottom: 1rem;">MODULE 3</span>
+        <h3>Election Security</h3>
+        <p style="margin: 1rem 0; color: var(--text-muted);">How your vote is protected and the role of independent observers.</p>
+        <button class="btn-secondary" style="width: 100%;">Start Module</button>
+      </div>
+    </div>
+  `;
+}
+
+async function renderDashboard() {
+  const main = document.getElementById('main-content');
+  main.innerHTML = `
+    <div class="page-header fade-in">
+      <h2>Welcome Back, Citizen</h2>
+      <p>Manage your saved candidates, track your learning progress, and see AI insights.</p>
+    </div>
+    
+    <div class="dashboard-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
+      <div class="stat-card glass" style="padding: 1.5rem; border-radius: var(--radius-md); text-align: center;">
+        <span style="font-size: 2rem; font-weight: 700; color: var(--primary);">2</span>
+        <p style="font-size: 0.875rem; color: var(--text-muted);">Saved Candidates</p>
+      </div>
+      <div class="stat-card glass" style="padding: 1.5rem; border-radius: var(--radius-md); text-align: center;">
+        <span style="font-size: 2rem; font-weight: 700; color: var(--accent);">35%</span>
+        <p style="font-size: 0.875rem; color: var(--text-muted);">Learning Progress</p>
+      </div>
+      <div class="stat-card glass" style="padding: 1.5rem; border-radius: var(--radius-md); text-align: center;">
+        <span style="font-size: 2rem; font-weight: 700; color: var(--primary-light);">12</span>
+        <p style="font-size: 0.875rem; color: var(--text-muted);">AI Queries Made</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <h3>Recent Activity</h3>
+      <div class="activity-list" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 1rem;">
+        <div class="activity-item glass" style="padding: 1rem; border-radius: var(--radius-md); display: flex; align-items: center; gap: 1rem;">
+          <i class="fas fa-search" style="color: var(--secondary);"></i>
+          <span>Searched for "Economic Policies"</span>
+          <span style="margin-left: auto; font-size: 0.75rem; color: var(--text-muted);">2 hours ago</span>
+        </div>
+        <div class="activity-item glass" style="padding: 1rem; border-radius: var(--radius-md); display: flex; align-items: center; gap: 1rem;">
+          <i class="fas fa-heart" style="color: #ef4444;"></i>
+          <span>Saved Candidate: <strong>Arjun Sharma</strong></span>
+          <span style="margin-left: auto; font-size: 0.75rem; color: var(--text-muted);">Yesterday</span>
+        </div>
+      </div>
+    </div>
+  `;
 }
