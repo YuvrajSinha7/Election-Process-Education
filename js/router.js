@@ -11,12 +11,14 @@ const Router = {
   },
 
   init() {
+    if (this.initialized) return;
     console.log('Router initializing...');
     window.addEventListener('hashchange', () => {
       console.log('Hash changed to:', window.location.hash);
       this.handleRoute();
     });
     this.handleRoute();
+    this.initialized = true;
   },
 
   handleRoute() {

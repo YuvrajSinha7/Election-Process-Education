@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatWindow = document.getElementById('ai-chat-window');
     if (chatWindow) {
       chatWindow.classList.toggle('active');
+      // Ensure existing window is initialized if it wasn't
+      if (!chatWindow.dataset.initialized) {
+        setupChatListeners(chatWindow);
+      }
     } else {
       createChatWindow();
     }
@@ -42,31 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('VoteWise App Initialized Successfully');
 });
 
-function createChatWindow() {
-  const window = document.createElement('div');
-  window.id = 'ai-chat-window';
-  window.className = 'ai-chat-window glass active fade-in';
-  window.innerHTML = `
-    <div class="chat-header">
-      <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <i class="fas fa-robot"></i>
-        <span>VoteWise AI</span>
-      </div>
-      <i class="fas fa-times close-chat" style="cursor: pointer;"></i>
-    </div>
-    <div id="chat-messages" class="chat-messages">
-      <div class="message bot">Hello! I'm your nonpartisan election assistant. How can I help you today?</div>
-    </div>
-    <div class="chat-input-area">
-      <input type="text" placeholder="Ask a question..." id="chat-input">
-      <button id="send-chat"><i class="fas fa-paper-plane"></i></button>
-    </div>
-  `;
-  document.body.appendChild(window);
+function setupChatListeners(chatWindow) {
+  const input = chatWindow.querySelector('#chat-input');
+  const sendBtn = chatWindow.querySelector('#send-chat');
+  const messages = chatWindow.querySelector('#chat-messages');
 
-  const input = document.getElementById('chat-input');
-  const sendBtn = document.getElementById('send-chat');
-  const messages = document.getElementById('chat-messages');
+  if (!input || !sendBtn || !messages) return;
 
   const sendMessage = async () => {
     const text = input.value.trim();
@@ -95,5 +80,33 @@ function createChatWindow() {
 
   sendBtn.onclick = sendMessage;
   input.onkeypress = (e) => e.key === 'Enter' && sendMessage();
-  window.querySelector('.close-chat').onclick = () => window.classList.remove('active');
+  
+  const closeBtn = chatWindow.querySelector('.close-chat');
+  if (closeBtn) closeBtn.onclick = () => chatWindow.classList.remove('active');
+  
+  chatWindow.dataset.initialized = "true";
+}
+
+function createChatWindow() {
+  const window = document.createElement('div');
+  window.id = 'ai-chat-window';
+  window.className = 'ai-chat-window glass active fade-in';
+  window.innerHTML = `
+    <div class="chat-header">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fas fa-robot"></i>
+        <span>VoteWise AI</span>
+      </div>
+      <i class="fas fa-times close-chat" style="cursor: pointer;"></i>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+      <div class="message bot">Hello! I'm your nonpartisan election assistant. How can I help you today?</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" placeholder="Ask a question..." id="chat-input">
+      <button id="send-chat"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  `;
+  document.body.appendChild(window);
+  setupChatListeners(window);
 }
