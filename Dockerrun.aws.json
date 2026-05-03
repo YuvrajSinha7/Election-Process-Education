@@ -1,9 +1,5 @@
 {
   "AWSEBDockerrunVersion": "1",
-  "Image": {
-    "Name": "election-process-education",
-    "Update": "true"
-  },
   "Ports": [
     {
       "ContainerPort": 3000,
