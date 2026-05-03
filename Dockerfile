@@ -36,4 +36,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 USER nextjs
 EXPOSE 3000
 ENV PORT 3000
-CMD ["node", "server.js"]
+
+# Automatically push database schema on startup to ensure production is always synced
+CMD ["sh", "-c", "npx prisma db push && node server.js"]
