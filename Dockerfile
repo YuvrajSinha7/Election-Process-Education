@@ -18,6 +18,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN mkdir -p public && mv js css data index.html public/ || true
 RUN npx prisma generate
 RUN npm run build
 
