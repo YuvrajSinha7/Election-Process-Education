@@ -36,7 +36,10 @@ COPY --from=builder /app/prisma ./prisma
 
 EXPOSE 3000
 ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
 
-# Automatically push database schema on startup to ensure production is always synced
-# We run this as root to ensure permissions for npx cache, then start as nextjs
-CMD npx prisma db push && npx prisma db seed && chown -R nextjs:nodejs . && exec su-exec nextjs node server.js
+COPY start.sh ./
+RUN chmod +x start.sh
+
+# Start the application using the entrypoint script
+CMD ["./start.sh"]
