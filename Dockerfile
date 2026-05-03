@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
-  elif [ -f package-lock.json ]; then npm ci; \
+  if [ -f package-lock.json ]; then npm ci; \
   elif [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   else npm install; \
   fi
