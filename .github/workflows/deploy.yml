@@ -27,14 +27,17 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
+      - name: Generate Deployment Package
+        run: zip -r deploy.zip . -x "*.git*" "node_modules/*"
+
       # Elastic Beanstalk Deployment (Optional)
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: "VoteWise"
-          environment_name: "VoteWise-env"
+          application_name: "VoteWise Election Platform"
+          environment_name: "VoteWiseElectionPlatform-env"
           version_label: ${{ github.sha }}
           region: "us-west-2"
           deployment_package: deploy.zip
